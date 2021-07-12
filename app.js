@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const UserModel= require('./model');
 
-const DBURL = 'mongodb+srv://pstene:AlphaBeta1234@cluster0.o9lly.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const DBURL = process.env.mongodbURL;
 // const DBURL = 'mongodb://127.0.0.1:27017/MerkleUsers';
 
 const app = express();
