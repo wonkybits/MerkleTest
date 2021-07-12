@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const UserModel= require('./model');
 
-const DBURL = 'mongodb://127.0.0.1:27017/MerkleUsers'
+const DBURL = 'mongodb+srv://pstene:AlphaBeta1234@cluster0.o9lly.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+// const DBURL = 'mongodb://127.0.0.1:27017/MerkleUsers';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -44,10 +45,6 @@ app.post('/confirm', (req, res) => {
         }
     });
 });
-
-// app.get('/confirm', (req, res) => {
-//     res.render('confirm');
-// });
 
 app.get('/admin', (req, res) => {
     UserModel.find({}).sort({date: 'desc'}).exec((err, records) => {
