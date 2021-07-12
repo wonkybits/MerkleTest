@@ -22,7 +22,7 @@ db.on('error', () => {
     console.error("DB connection failed.");
 });
 db.once('open', () => {
-    console.log("DB connection stablished.");
+    console.log("DB connection established.");
 });
 
 app.get('/', (req, res) => {
@@ -33,7 +33,6 @@ app.post('/confirm', (req, res) => {
     UserModel.count({ firstname:req.body.firstname, lastname: req.body.lastname }, (err, count) => {
         if(err) console.error(err);
         if(count > 0) {
-            console.log("found document");
             res.render('confirm', { data: "User already exists" });
         } else {
             req.body.date = Date.now();
@@ -49,7 +48,6 @@ app.post('/confirm', (req, res) => {
 app.get('/admin', (req, res) => {
     UserModel.find({}).sort({date: 'desc'}).exec((err, records) => {
         if(err) console.error(err);
-        console.log(records);
         let output = records.reduce((acc, curr) => {
             return acc + "<tr>\n" +
                 "<td>" + curr.firstname + "</td>\n" +
