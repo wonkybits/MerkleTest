@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <%- include('./partials/head'); %>
+    </head>
+    <body>
+        <form data-abide method="post" action="/confirm">
+            <div class="grid-container">
+                <div class="grid-x grid-margin-x">
+                    <div class="medium-6 cell">
+                        <label>First Name
+                            <input id="firstname" name="firstname" type="text" placeholder="abcd" pattern="alpha" required />
+                            <span class="form-error" data-form-error-on="required">Please specify a First Name.</span>
+                            <span class="form-error" data-form-error-on="pattern">Please use letters.</span>
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>Last Name
+                            <input name="lastname" type="text" placeholder="abcd" pattern="alpha" required />
+                            <span class="form-error" data-form-error-on="required">Please specify a Last Name.</span>
+                            <span class="form-error" data-form-error-on="pattern">Please use letters.</span>
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>Address 1
+                            <input name="address1" type="text" placeholder="abcd" pattern="address" required />
+                            <span class="form-error" data-form-error-on="required">Please specify an Address.</span>
+                            <span class="form-error" data-form-error-on="pattern">Please use letters and numbers, no special characters.</span>
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>Address 2
+                            <input name="address2" type="text" placeholder="abcd"/>
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>City
+                            <input name="city" type="text" placeholder="abcd" pattern="state-city" required />
+                            <span class="form-error" data-form-error-on="required">Please specify a City.</span>
+                            <span class="form-error" data-form-error-on="pattern">Please use letters.</span>
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>State
+                            <input name="state" type="text" placeholder="abcd" pattern="state-city" required />
+                            <span class="form-error" data-form-error-on="required">Please specify a State.</span>
+                            <span class="form-error" data-form-error-on="pattern">Please use letters.</span>
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>Zip (5 or 9 digit)
+                            <input name="zip" type="text" placeholder="1234" pattern="number" required />
+                            <span class="form-error" data-form-error-on="required">Please specify a Zip Code.</span>
+                            <span class="form-error" data-form-error-on="pattern">Please use numbers.</span>
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>Country
+                            <input name="country" type="text" placeholder="US" readonly value="US" />
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-btn" value="Submit" class="button">Submit</button>
+            </div>
+        </form>
+        <footer>
+            <%- include('./partials/footer'); %>
+        </footer>
+
+        <%- include('./partials/bottomJS'); %>
+    </body>
+</html>

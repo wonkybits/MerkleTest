@@ -1,0 +1,24 @@
+<html>
+<head>
+    <%- include('./partials/head'); %>
+</head>
+<body>
+<form data-abide novalidate>
+    <div data-abide-error class="sr-only">
+        There are some errors in your form.
+    </div>
+
+    <div>
+        Amount
+        <div class="input-group">
+            <span class="input-group-label">$</span>
+            <input class="input-group-field" id="example3Input" type="number" required pattern="number"/>
+        </div>
+        <label class="form-error" data-form-error-for="example3Input">Amount is required.</label>
+    </div>
+
+    <button class="button" type="submit" value="Submit">Submit</button>
+</form>
+
+</body>
+</html>
