@@ -4,8 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const UserModel= require('./model');
 
-const DBURL = process.env.mongodbURL;
-// const DBURL = 'mongodb://127.0.0.1:27017/MerkleUsers';
+const DBURL = process.env.mongodbURL || 'mongodb://127.0.0.1:27017/MerkleUsers';
 
 const app = express();
 const port = process.env.PORT || 3000;
