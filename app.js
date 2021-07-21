@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const UserModel= require('./model');
+const escapeRegex = require('escape-string-regexp');
 
 const DBURL = process.env.mongodbURL || 'mongodb://127.0.0.1:27017/MerkleUsers';
 
@@ -24,6 +25,11 @@ db.once('open', () => {
     console.log("DB connection established.");
 });
 
+function escapeRegExp(input) {
+    const source = typeof input === 'string' || input instanceof String ? input : '';
+    return source.replace(/[*+?^${}()|[\]\\]/g, '\\$&');
+};
+
 app.get('/', (req, res) => {
     res.render('index');
 });
@@ -35,7 +41,20 @@ app.post('/confirm', (req, res) => {
             res.render('confirm', { data: "User already exists" });
         } else {
             req.body.date = Date.now();
-            const newUser = new UserModel(req.body);
+
+            const newUser = new UserModel(
+                {
+                    firstname: escapeRegExp(req.body.firstname),
+                    lastname: escapeRegExp(req.body.lastname),
+                    address1: escapeRegExp(req.body.address1),
+                    address2: escapeRegExp(req.body.address2),
+                    city: escapeRegExp(req.body.city),
+                    state: escapeRegExp(req.body.state),
+                    zip: escapeRegExp(req.body.zip),
+                    country: escapeRegExp(req.body.country),
+                    date: Date.now()
+                }
+            );
             newUser.save((err, user) => {
                 if(err) return console.error(err);
                 res.render('confirm', { data: "" + user.firstname + " " + user.lastname + " has been registered." });
