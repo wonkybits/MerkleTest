@@ -1,5 +1,6 @@
 <script type="application/javascript">
     Foundation.Abide.defaults.patterns['address'] = /(\d{0,})\s?([a-zA-Z])\s?([a-zA-Z]{1,15})\.?/;
     Foundation.Abide.defaults.patterns['state-city'] = /^[\w]+([-_\s]{1}[a-zA-Z0-9]+)*$/;
+    Foundation.Abide.defaults.patterns['zip'] = /^\d{5}(-\d{4})?$/;
     $(document).foundation();
 </script>
