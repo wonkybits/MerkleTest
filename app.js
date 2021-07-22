@@ -84,6 +84,13 @@ const profileValidate = [
         .trim()
         .escape()
 ];
+const ValidationErrorOutput = (arr) => {
+    return arr.reduce((acc, curr) => {
+        return acc + '<div class="cell large-12">' +
+            `<p>${curr}</p>` +
+            '</div>';
+    }, '');
+}
 
 //Database connection
 mongoose.connect(DBURL, { useUnifiedTopology: true, useNewUrlParser: true });
@@ -101,11 +108,12 @@ app.get('/', (req, res) => {
 });
 
 app.post('/confirm', profileValidate, (req, res) => {
-    console.log(req.body);
-    const errors = validationResult(req);
+    const errors = validationResult(req).formatWith(({location, msg, param, value, nestedErrors}) => {
+        return `${param}[${escape(value)}]: ${msg}`;
+    });
     if (!errors.isEmpty()) {
-        // return res.status(422).json({ errors: errors.array() });
-        res.render('error');
+        console.log(errors.array());
+        res.render('validation-error', { parsedErrors: ValidationErrorOutput(errors.array()) });
     }
     else {
         UserModel.count({ firstname:req.body.firstname, lastname: req.body.lastname }, (err, count) => {
